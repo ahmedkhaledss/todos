@@ -11,11 +11,12 @@ import UIKit
 import SwiftyJSON
 
 class Todo: NSObject {
-    var id : Int
     var title : String
     
     init(json : JSON) {
-        self.id = json["id"].intValue
         self.title = json["title"].stringValue
+    }
+    init(title : String) {
+        self.title = title
     }
 }

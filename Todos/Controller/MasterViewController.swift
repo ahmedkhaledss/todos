@@ -10,16 +10,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class MasterViewController: UITableViewController {
+
+class MasterViewController: UITableViewController, AddViewControllerDelegate {
 
 
     let jsonServerURL = "https://my-json-server.typicode.com/ahmedkhaledss/jsonrepo/todos"
     
-    
+
     var detailViewController: DetailViewController? = nil
     var todos = [Todo]()
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -63,6 +64,7 @@ class MasterViewController: UITableViewController {
         
     }
 
+    
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
@@ -96,10 +98,14 @@ class MasterViewController: UITableViewController {
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
+        else if segue.identifier == "addTodo" {
+            let controller = segue.destination as! AddViewController
+            controller.delegate = self
+        }
     }
-
+    
     // MARK: - Table View
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -130,5 +136,10 @@ class MasterViewController: UITableViewController {
     }
 
 
+    //MARK: - Delegate Method
+    func todoAdded(todo: Todo) {
+        todos.append(todo)
+        tableView.reloadData()
+    }
 }
 

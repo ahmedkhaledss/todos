@@ -10,8 +10,13 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+protocol AddViewControllerDelegate {
+    func todoAdded(todo : Todo)
+}
 class AddViewController: UIViewController {
-        let jsonServerURL = "https://my-json-server.typicode.com/ahmedkhaledss/jsonrepo/todos"
+    
+    var delegate : AddViewControllerDelegate? = nil
+    let jsonServerURL = "https://my-json-server.typicode.com/ahmedkhaledss/jsonrepo/todos"
 
 
     @IBOutlet weak var tTitle: UITextField!    
@@ -20,8 +25,13 @@ class AddViewController: UIViewController {
         Alamofire.request(jsonServerURL, method: .post, parameters: param, encoding: JSONEncoding.default).responseString {
             response in
             if response.result.isSuccess {
-
+                
+                
                 print(response)
+                let todo : Todo = Todo(title : self.tTitle.text!)
+                self.delegate?.todoAdded(todo: todo)
+                self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true, completion: nil)
             }
             else {
                 print("Error : \(response.result.error!)")
