@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SVProgressHUD
 
 
 class MasterViewController: UITableViewController, AddViewControllerDelegate {
@@ -33,10 +34,11 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
-        
+        SVProgressHUD.show()
         Alamofire.request(jsonServerURL, method: .get, parameters: nil).responseJSON {
             response in
             if(response.result.isSuccess) {
+                SVProgressHUD.dismiss()
                 let todos : JSON = JSON(response.result.value!)
                 //print(todos)
                 if let jsonArray : [JSON] = todos.array {
@@ -47,6 +49,7 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
                     }
                 }
                 else {
+
                     let alertController : UIAlertController = UIAlertController(title: "Error", message: "The Application has encountered a problem", preferredStyle: .alert)
                     let action : UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                     alertController.addAction(action)
@@ -54,6 +57,7 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
                 }
             }
             else {
+                SVProgressHUD.dismiss()
                 let alertController : UIAlertController = UIAlertController(title: "Error", message: response.result.error!.localizedDescription, preferredStyle: .alert)
                 let action : UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                 alertController.addAction(action)
@@ -128,8 +132,24 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            todos.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let param : [String : Any] = ["title" : todos[indexPath.row].title]
+            SVProgressHUD.show()
+            Alamofire.request(jsonServerURL, method: .delete, parameters: param, encoding: JSONEncoding.default).responseString {
+                response in
+                if response.result.isSuccess {
+                    SVProgressHUD.dismiss()
+                    self.todos.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+                else {
+                    SVProgressHUD.dismiss()
+                    let alertController : UIAlertController = UIAlertController(title: "Error", message: response.result.error!.localizedDescription, preferredStyle: .alert)
+                    let action : UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alertController.addAction(action)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }

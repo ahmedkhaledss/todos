@@ -7,4 +7,5 @@ target 'Todos' do
   # Pods for Todos
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'SVProgressHUD'
 end

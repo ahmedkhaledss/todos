@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SVProgressHUD
 
 protocol AddViewControllerDelegate {
     func todoAdded(todo : Todo)
@@ -21,20 +22,24 @@ class AddViewController: UIViewController {
 
     @IBOutlet weak var tTitle: UITextField!    
     @IBAction func saveBtn(_ sender: Any) {
+        view.endEditing(true)
+        SVProgressHUD.show()
         let param : [String : Any] = ["title": tTitle.text!]
         Alamofire.request(jsonServerURL, method: .post, parameters: param, encoding: JSONEncoding.default).responseString {
             response in
             if response.result.isSuccess {
-                
-                
-                print(response)
+                SVProgressHUD.dismiss()
                 let todo : Todo = Todo(title : self.tTitle.text!)
                 self.delegate?.todoAdded(todo: todo)
                 self.navigationController?.popViewController(animated: true)
                 self.dismiss(animated: true, completion: nil)
             }
             else {
-                print("Error : \(response.result.error!)")
+                SVProgressHUD.dismiss()
+                let alert : UIAlertController = UIAlertController(title: "Error", message: response.result.error!.localizedDescription, preferredStyle: .alert)
+                let action : UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
             }
             
         }
@@ -52,7 +57,9 @@ class AddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     /*
     // MARK: - Navigation
 

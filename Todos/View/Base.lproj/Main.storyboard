@@ -119,7 +119,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Todos List" id="Zdf-7t-Un8"/>
                     <connections>
                         <segue destination="vPT-lu-ANo" kind="show" identifier="addTodo" id="vfx-jZ-kkw"/>
                     </connections>
