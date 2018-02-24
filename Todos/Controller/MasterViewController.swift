@@ -24,9 +24,8 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.leftBarButtonItem = editButtonItem
 
+        navigationItem.leftBarButtonItem = editButtonItem
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(segueToAddTodo))
         navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
@@ -43,8 +42,7 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
                 //print(todos)
                 if let jsonArray : [JSON] = todos.array {
                     for json in jsonArray {
-                        let todo = Todo(json : json)
-                        
+                        let todo = Todo(json : json)                        
                         self.insertNewTodo(todo)
                     }
                 }
