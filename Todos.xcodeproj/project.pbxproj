@@ -16,6 +16,7 @@
 		B026A1CB2023875E0080B98D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B026A1C92023875E0080B98D /* LaunchScreen.storyboard */; };
 		B026A1D32023A1340080B98D /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B026A1D22023A1340080B98D /* Todo.swift */; };
 		B026A1D5202485710080B98D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B026A1D4202485710080B98D /* AddViewController.swift */; };
+		B0E643EE2062BE2900880615 /* MasterViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E643ED2062BE2900880615 /* MasterViewPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		B026A1CC2023875E0080B98D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B026A1D22023A1340080B98D /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		B026A1D4202485710080B98D /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		B0E643ED2062BE2900880615 /* MasterViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewPresenter.swift; sourceTree = "<group>"; };
 		BE208460FA41B613D74D89AC /* Pods-Todos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Todos/Pods-Todos.debug.xcconfig"; sourceTree = "<group>"; };
 		E069311A3C6DC08DBDCF0869 /* Pods_Todos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Todos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A706DBCD640A5CC2EA59D1 /* Pods-Todos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todos.release.xcconfig"; path = "Pods/Target Support Files/Pods-Todos/Pods-Todos.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				B0E69E79203B60E400564DF8 /* View */,
 				B0E69E78203B60C900564DF8 /* Controller */,
 				B0E69E7B203B61F200564DF8 /* Supporting Files */,
+				B0E643ED2062BE2900880615 /* MasterViewPresenter.swift */,
 			);
 			path = Todos;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				B026A1C12023875E0080B98D /* MasterViewController.swift in Sources */,
 				B026A1BF2023875E0080B98D /* AppDelegate.swift in Sources */,
 				B026A1D32023A1340080B98D /* Todo.swift in Sources */,
+				B0E643EE2062BE2900880615 /* MasterViewPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
