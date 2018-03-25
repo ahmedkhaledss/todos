@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 
 
-class MasterViewController: UITableViewController, AddViewControllerDelegate {
+class MasterViewController: UITableViewController, AddViewPresenterDelegate {
 
     var detailViewController: DetailViewController? = nil
     var presenter : MasterViewPresenter? = nil
@@ -64,7 +64,7 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
         }
         else if segue.identifier == "addTodo" {
             let controller = segue.destination as! AddViewController
-            controller.delegate = self
+            controller.presenter?.delegate = self
         }
     }
     
@@ -101,6 +101,8 @@ class MasterViewController: UITableViewController, AddViewControllerDelegate {
 
     //MARK: - Delegate Method
     func todoAdded(todo: Todo) {
+        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
         presenter?.todos.append(todo)
         tableView.reloadData()
     }
